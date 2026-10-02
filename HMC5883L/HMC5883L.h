@@ -5,24 +5,29 @@
 
 // Driver que no va a cambiar entre acquitecturas
 
-#define HMC5883L_ADRRESS 0x3C << 1
+#define QMC5883P_ADDRESS          (0x2C << 1)
 
-#define HMC5883L_CONF_REG_A 0x0B
-#define HMC5883L_CONF_REG_B 0x0C
-#define HMC5883L_CONF_MODE 0x0A
-#define HMC5883L_DATA_X_H 0x01
-#define HMC5883L_DATA_X_L 0x02
-#define HMC5883L_DATA_Z_H 0x03
-#define HMC5883L_DATA_Z_L 0x04
-#define HMC5883L_DATA_Y_H 0x05
-#define HMC5883L_DATA_Y_L 0x06
+#define QMC5883P_REG_ID           0x00
 
-#define HMC5883L_AVG_8 (0x3 << 5)
-#define HMC5883L_RATE_15_HZ (0x4 << 2)
+#define QMC5883P_REG_X_LSB        0x01
+#define QMC5883P_REG_X_MSB        0x02
+#define QMC5883P_REG_Y_LSB        0x03
+#define QMC5883P_REG_Y_MSB        0x04
+#define QMC5883P_REG_Z_LSB        0x05
+#define QMC5883P_REG_Z_MSB        0x06
 
-#define HMC5883L_GAIN_1_3 (0x1 << 5)
+#define QMC5883P_REG_STATUS       0x09
+#define QMC5883P_REG_CONF1        0x0A
+#define QMC5883P_REG_CONF2        0x0B
 
-#define HMC5883L_MODE_CONTINUOUS (0x0 << 0)
+#define QMC5883P_MODE_STANDBY      0x00
+#define QMC5883P_MODE_CONTINUOUS   0x03
+
+#define QMC5883P_ODR_10HZ          (0x00 << 2)
+#define QMC5883P_ODR_50HZ          (0x01 << 2)
+
+#define QMC5883P_RANGE_2G          (0x00 << 4)
+#define QMC5883P_RANGE_8G          (0x01 << 4)
 
 
 void HMC5883L_Init(void);
