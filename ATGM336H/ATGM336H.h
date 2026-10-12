@@ -5,12 +5,14 @@
 #include <stdbool.h>
 
 typedef struct {
-    float fLongitud;
-    float fLatitud;
-    uint16_t u16Satelites;
-    bool bAntenaOk;
     bool bFix;
+    uint16_t u16Satelites;
+    float fAltitud;
+    float fLatitud;
+    float fLongitud;
 }LecturaGPS;
+
+extern uint8_t u8BufferMsg[961];
 
 LecturaGPS ATGM336H_GetData(const uint8_t* u8Msg);
 

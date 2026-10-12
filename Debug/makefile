@@ -17,6 +17,7 @@ RM := rm -rf
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
+-include ATGM336H/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -66,7 +67,7 @@ main-build: MinecraftCompass.elf secondary-outputs
 
 # Tool invocations
 MinecraftCompass.elf MinecraftCompass.map: $(OBJS) $(USER_OBJS) D:\Repos\Brujula-Minecraft\STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "MinecraftCompass.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Repos\Brujula-Minecraft\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MinecraftCompass.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "MinecraftCompass.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Repos\Brujula-Minecraft\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MinecraftCompass.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

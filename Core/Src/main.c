@@ -30,7 +30,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../HMC5883L/HMC5883L.h"
+#include "../../HMC5883L/HMC5883L.h"
+#include "../../ATGM336H/ATGM336H.h"
 #include <stdio.h>
 #include <string.h>
 /* USER CODE END Includes */
@@ -121,10 +122,14 @@ int main(void)
 		HAL_Delay(500);
 	}
 	*/
-	uint8_t u8Buffer [512] = {0};
+	uint8_t u8Buffer [960] = {0};
 	for(;;){
 		HAL_UART_Receive(&huart5, u8Buffer, sizeof(u8Buffer), 1000);
-		HAL_UART_Transmit(&huart1, u8Buffer, 512, 100);
+		LecturaGPS DatosLeidos = ATGM336H_GetData(u8Buffer);
+    sprintf((char *)u8Buffer, "Lat: %f\n Log: %f\n Sat: %u\n Alt: %f\n ---- \n", DatosLeidos.fLatitud, DatosLeidos.fLongitud, DatosLeidos.u16Satelites, DatosLeidos.fAltitud);
+    HAL_UART_Transmit(&huart1, u8Buffer, strlen((const char *)u8Buffer), 100);
+    memset(u8Buffer, 0, sizeof(u8Buffer));
+
 	}
 
 
